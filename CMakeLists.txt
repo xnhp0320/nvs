@@ -15,19 +15,20 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-# Process Abseil's CMake build system
-#enable_testing()
+enable_testing()
+
+add_subdirectory(fmt)
 
 add_executable(
-  netdev
+  netdev_test
   netdev.cc
-  main.cc
+  netdev_test.cc
 )
 
-#target_link_libraries(
-#  netdev
-#  GTest::gtest_main
-#)
+target_link_libraries(
+  netdev_test
+  GTest::gtest_main
+)
 
-#include(GoogleTest)
-#gtest_discover_tests(eth_test)
+include(GoogleTest)
+gtest_discover_tests(netdev_test)
